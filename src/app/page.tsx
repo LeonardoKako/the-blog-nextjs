@@ -1,7 +1,9 @@
-export default function HomePage() {
+import Header from "@/components/Header";
+
+export default async function HomePage() {
   return (
-    <div className='bg-red-400'>
-      <h1>Olá rapazes rs</h1>
-    </div>
+    <>
+      <Header />
+    </>
   );
 }
