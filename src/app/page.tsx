@@ -1,21 +1,23 @@
-import { Container } from "@/components/Container";
-import Header from "@/components/Header";
 import { PostFeatured } from "@/components/PostFeatured";
 import PostsList from "@/components/PostsList";
 import SpinLoader from "@/components/SpinLoader";
+import { Metadata } from "next";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Teste",
+
+  description: "Descrição",
+};
 
 export default async function HomePage() {
   return (
-    <Container>
-      <Header />
-      <PostFeatured />
+    <>
       <Suspense fallback={<SpinLoader />}>
+        <PostFeatured />
+
         <PostsList />
       </Suspense>
-      <footer>
-        <h1 className="text-6xl font-bold text-center py-8">Aqui é o footer</h1>
-      </footer>
-    </Container>
+    </>
   );
 }
