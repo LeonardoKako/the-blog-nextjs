@@ -2,23 +2,28 @@ import clsx from "clsx";
 
 export default function NotFoundPage() {
   return (
-    <div
-      className={clsx(
-        "min-h-[320px]",
-        "bg-slate-900",
-        "text-slate-100",
-        "mb-16",
-        "p-8",
-        "rounded-xl",
-        "flex",
-        "items-center",
-        "justify-center"
-      )}
-    >
-      <div>
-        <h1 className="text-7xl/normal mb-8 font-extrabold text-center">404</h1>
-        <p>Erro 404 - A página que você está tentando acessar não existe</p>
+    <>
+      <title>Página não encontrada</title>
+      <div
+        className={clsx(
+          "min-h-[320px]",
+          "bg-slate-900",
+          "text-slate-100",
+          "mb-16",
+          "p-8",
+          "rounded-xl",
+          "flex",
+          "items-center",
+          "justify-center"
+        )}
+      >
+        <div>
+          <h1 className="text-7xl/normal mb-8 font-extrabold text-center">
+            404
+          </h1>
+          <p>Erro 404 - A página que você está tentando acessar não existe</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
