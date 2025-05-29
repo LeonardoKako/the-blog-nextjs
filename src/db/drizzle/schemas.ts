@@ -11,7 +11,7 @@ export const postsTable = sqliteTable("posts", {
   coverImageUrl: text("cover_image_url").notNull(),
   published: integer("published", { mode: "boolean" }).notNull(),
   createdAt: text("created_at").notNull(),
-  uptadeAt: text("uptade_at").notNull(),
+  updatedAt: text("uptaded_at").notNull(),
 });
 
 export type PostsTableSelectModel = InferSelectModel<typeof postsTable>;
