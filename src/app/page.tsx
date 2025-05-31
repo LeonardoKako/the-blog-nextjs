@@ -4,6 +4,8 @@ import SpinLoader from "@/components/SpinLoader";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "Teste",
 
