@@ -3,7 +3,7 @@ import SpinLoader from "@/components/SpinLoader";
 import {
   findAllPublicPostsCached,
   findPublicPostBySlugCached,
-} from "@/lib/post/queries";
+} from "@/lib/post/queries/public";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
