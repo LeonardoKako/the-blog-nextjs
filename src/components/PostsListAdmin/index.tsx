@@ -5,6 +5,7 @@ import { DeletePostButton } from "../admin/DeletePostButton";
 
 export default async function PostsListAdmin() {
   const posts = await findAllPostAdmin();
+
   return (
     <div className="mb-16">
       {posts.map((post) => {

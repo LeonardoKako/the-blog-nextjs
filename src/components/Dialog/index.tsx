@@ -3,10 +3,27 @@ import clsx from "clsx";
 type DialogProps = {
   isVisible?: boolean;
   title: string;
+  content: React.ReactNode;
+  onConfirm: () => void;
+  onCancel: () => void;
+  disabled: boolean;
 };
 
-export function Dialog({ isVisible = false }: DialogProps) {
+export function Dialog({
+  isVisible = false,
+  content,
+  title,
+  onCancel,
+  onConfirm,
+  disabled,
+}: DialogProps) {
   if (!isVisible) return null;
+
+  function handleCancel() {
+    if (!disabled) return;
+
+    onCancel();
+  }
 
   return (
     <div
@@ -14,6 +31,7 @@ export function Dialog({ isVisible = false }: DialogProps) {
         "z-50 fixed inset-0 bg-black/50 backdrop-blur-xs",
         "flex items-center justify-center"
       )}
+      onClick={handleCancel}
     >
       <div
         className={clsx(
@@ -21,14 +39,16 @@ export function Dialog({ isVisible = false }: DialogProps) {
           "flex flex-col gap-6 text-center",
           "shadow-lg shadow-black/30"
         )}
+        role="dialog"
+        aria-modal={true}
+        aria-labelledby="dialog-title"
+        aria-describedby="dialog-description"
+        onClick={(e) => e.stopPropagation()}
       >
-        <h3 className="font-extrabold text-xl">Título do diálogo</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-          dolorum, aut magni velit maxime nihil. Dicta maiores doloremque,
-          assumenda nisi asperiores debitis explicabo quaerat pariatur natus
-          tempore optio, adipisci laboriosam.
-        </p>
+        <h3 id="dialog-title" className="font-extrabold text-xl">
+          {title}
+        </h3>
+        <div id="dialog-description">{content}</div>
         <div className="flex items-center justify-around">
           <button
             className={clsx(
@@ -37,6 +57,8 @@ export function Dialog({ isVisible = false }: DialogProps) {
               "py-2 px-4 rounded-lg cursor-pointer"
             )}
             autoFocus
+            onClick={handleCancel}
+            disabled={disabled}
           >
             Cancelar
           </button>
@@ -44,8 +66,11 @@ export function Dialog({ isVisible = false }: DialogProps) {
             className={clsx(
               "bg-blue-500 hover:bg-blue-600 text-blue-50 transition",
               "flex items-center justify-center",
-              "py-2 px-4 rounded-lg cursor-pointer"
+              "py-2 px-4 rounded-lg cursor-pointer",
+              "disabled:bg-slate-300 disabled:text-slate-400 disabled:cursor-not-allowed"
             )}
+            onClick={onConfirm}
+            disabled={disabled}
           >
             Ok
           </button>
