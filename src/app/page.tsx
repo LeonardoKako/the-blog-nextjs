@@ -7,8 +7,6 @@ import { Suspense } from "react";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Teste",
-
   description: "Descrição",
 };
 
