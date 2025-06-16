@@ -68,8 +68,7 @@ const obj = {
 };
 
 const zodParsedObj = PostCreateSchema.safeParse(obj);
-console.log(zodParsedObj);
 
 if (!zodParsedObj.success) {
-  console.log(zodParsedObj.error.format());
+  // console.log(zodParsedObj.error.format());
 }
