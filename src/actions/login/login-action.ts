@@ -1,6 +1,8 @@
 "use server";
 
+import { createLoginSession, verifyPassword } from "@/lib/login/manage-login";
 import { asyncDelay } from "@/utils/async-delay";
+import { redirect } from "next/navigation";
 
 type loginActionState = {
   username: string;
@@ -18,15 +20,30 @@ export async function loginAction(state: loginActionState, formData: FormData) {
   }
 
   // Dados vindo do form
-  const username = formData.get("username")?.toString() || "";
-  const password = formData.get("password")?.toString() || "";
+  const username = formData.get("username")?.toString().trim() || "";
+  const password = formData.get("password")?.toString().trim() || "";
+
+  if (!username || !password) {
+    return {
+      username,
+      error: "Digite o usuário e a senha",
+    };
+  }
 
   // Aqui eu checaria se o usuário existe na base de dados
   const isUsernameValid = username === process.env.LOGIN_USER;
-  const isPasswordValid = "";
+  const isPasswordValid = await verifyPassword(
+    password,
+    process.env.LOGIN_PASS || ""
+  );
 
-  return {
-    username: "",
-    error: "",
-  };
+  if (!isUsernameValid || !isPasswordValid) {
+    return {
+      username,
+      error: "Usuario ou senha inválidos",
+    };
+  }
+
+  await createLoginSession(username);
+  redirect("/admin/post");
 }
