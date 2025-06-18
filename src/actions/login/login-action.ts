@@ -1,6 +1,6 @@
 "use server";
 
-import { createLoginSession, verifyPassword } from "@/lib/login/manage-login";
+import { createLoginSession } from "@/lib/login/manage-login";
 import { asyncDelay } from "@/utils/async-delay";
 import { redirect } from "next/navigation";
 
