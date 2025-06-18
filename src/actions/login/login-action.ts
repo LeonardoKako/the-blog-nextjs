@@ -1,6 +1,7 @@
 "use server";
 
 import { createLoginSession } from "@/lib/login/manage-login";
+import { verifyPassword } from "@/lib/login/password-hasing";
 import { asyncDelay } from "@/utils/async-delay";
 import { redirect } from "next/navigation";
 
@@ -10,6 +11,12 @@ type loginActionState = {
 };
 
 export async function loginAction(state: loginActionState, formData: FormData) {
+  const allowLogin = Boolean(Number(process.env.ALLOW_LOGIN));
+
+  if (!allowLogin) {
+    return { username: "", error: "Login not allowed" };
+  }
+
   await asyncDelay(3000);
 
   if (!(formData instanceof FormData)) {
